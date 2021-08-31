@@ -1,7 +1,7 @@
 name = "provider-proxy"
 type = "javascript"
-zone_id = ""
-account_id = ""
+zone_id = "PLACEHOLDER"
+account_id = "PLACEHOLDER"
 route = ""
 workers_dev = true
 
