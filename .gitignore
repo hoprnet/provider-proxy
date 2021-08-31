@@ -1,1 +1,10 @@
 /node_modules/
+
+# yarn v2/v3 specific
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
