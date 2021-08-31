@@ -4,7 +4,7 @@ This is a small Cloudflare worker library which implements a configuration-based
 web-proxy used to map keys to full URLs. In particular its used to map
 ETH API provider names with ETH API provider endpoint URLs.
 
-The configuration of providers is done in `src/prodivers.ts`.
+The configuration of providers is done in `src/providers.ts`.
 
 ## Setup
 
