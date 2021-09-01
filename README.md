@@ -26,4 +26,8 @@ All providers are tested by running `yarn && yarn test`.
 
 ## Deploy
 
-TODO
+Just upload the current state to Cloudflare. It will become live immediately.
+
+```
+yarn wrangler publish
+```
