@@ -2,8 +2,9 @@ name = "provider-proxy"
 type = "javascript"
 zone_id = "PLACEHOLDER"
 account_id = "PLACEHOLDER"
-route = ""
+route = "/*"
 workers_dev = true
+usage_model = "unbound"
 
 [build]
 command = "yarn && yarn build"
