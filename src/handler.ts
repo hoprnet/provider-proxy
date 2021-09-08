@@ -6,7 +6,7 @@ export async function handleRequest(request: Request): Promise<Response> {
 
   // fail early if method is not supported
   if (request.method != "POST") {
-    console.log(`Unsupported request: ${request.url}`)
+    console.log(`Unsupported request: ${request.url}`);
     return new Response("not found", { status: 405 });
   }
 
@@ -14,25 +14,28 @@ export async function handleRequest(request: Request): Promise<Response> {
   const provider = Object.entries(providers).find(([k]) => k === path);
   if (provider === undefined) {
     // if the provider is not known, return not found
-    console.log(`Unknown request: ${request.url}`)
+    console.log(`Unknown request: ${request.url}`);
     return new Response("not found", { status: 404 });
   }
 
-  // const method = request.body;
   const requestJson = await request.clone().json();
   const method = requestJson.method;
   const [, providerUrl] = provider;
   const start = Date.now();
 
-  return fetch(providerUrl, request).then(function(response) {
+  return fetch(providerUrl, request).then(async function (response) {
     const elapsed = Date.now() - start;
     const responseClone = response.clone();
-    const responseCloneJson = responseClone.json();
+    const responseCloneJson = await responseClone.json();
+
     let result = "ok";
-    if ('error' in responseCloneJson) {
+    if (responseCloneJson.error !== undefined) {
       result = `error ${responseCloneJson.error.message}`;
     }
-    console.log(`Forwarded request to ${path}, processed in ${elapsed} ms, called method ${method}, returned ${result}`);
+
+    console.log(
+      `Forwarded request to ${path}, processed in ${elapsed} ms, called method ${method}, returned ${result}`
+    );
     return response;
   });
 }
