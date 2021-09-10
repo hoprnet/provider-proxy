@@ -19,7 +19,12 @@ export async function handleRequest(request: Request): Promise<Response> {
   }
 
   const requestJson = await request.clone().json();
-  const method = requestJson.method;
+  let isMulticall = false;
+  let method = requestJson.method;
+  if (Array.isArray(requestJson)) {
+    isMulticall = true;
+    method = requestJson[0].method;
+  }
   const [, providerUrl] = provider;
   const start = Date.now();
 
@@ -27,15 +32,27 @@ export async function handleRequest(request: Request): Promise<Response> {
     const elapsed = Date.now() - start;
     const responseClone = response.clone();
     const responseCloneJson = await responseClone.json();
-
     let result = "ok";
-    if (responseCloneJson.error !== undefined) {
-      result = `error ${responseCloneJson.error.message}`;
+    if (isMulticall) {
+      const callCount = requestJson.length;
+      const errorResponse = responseCloneJson.find(
+        (r) => r.error !== undefined
+      );
+      if (errorResponse !== undefined) {
+        result = `at least 1 error ${errorResponse.error.message}`;
+      }
+      console.log(
+        `Forwarded multi-call request to ${path}, processed in ${elapsed} ms, called method ${method}, returned ${result}, included ${callCount} calls`
+      );
+    } else {
+      if (responseCloneJson.error !== undefined) {
+        result = `error ${responseCloneJson.error.message}`;
+      }
+      console.log(
+        `Forwarded request to ${path}, processed in ${elapsed} ms, called method ${method}, returned ${result}`
+      );
     }
 
-    console.log(
-      `Forwarded request to ${path}, processed in ${elapsed} ms, called method ${method}, returned ${result}`
-    );
     return response;
   });
 }
