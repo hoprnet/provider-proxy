@@ -12,4 +12,6 @@ export const providers = {
   eth_goerli: "https://goerli.infura.io/v3/51d4d972f30c4d92b61f2b3898fccaf6",
   eth_ceramic_mainnet_infura:
     "https://mainnet.infura.io/v3/bdd0361db7d24b2aa3fdae4d7b7c78fb",
+  eth_ceramic_testnet_infura:
+    "https://ropsten.infura.io/v3/bdd0361db7d24b2aa3fdae4d7b7c78fb",
 };
