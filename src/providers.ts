@@ -14,4 +14,5 @@ export const providers = {
     "https://mainnet.infura.io/v3/bdd0361db7d24b2aa3fdae4d7b7c78fb",
   eth_ceramic_testnet_infura:
     "https://ropsten.infura.io/v3/bdd0361db7d24b2aa3fdae4d7b7c78fb",
+  eth_gnosis_mainnet_alt: "https://eth-erigon.lsotech.net/",
 };
