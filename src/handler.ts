@@ -31,7 +31,7 @@ export async function handleRequest(request: Request): Promise<Response> {
   return fetch(providerUrl, request).then(async function (response) {
     const elapsed = Date.now() - start;
     let responseSizeInfo = "";
-    let responseSize = Number(response.headers.get("content-length"));
+    const responseSize = Number(response.headers.get("content-length"));
     if (responseSize > 0) {
       console.log(`response size: ${responseSize} Bytes`);
       responseSizeInfo = `, response size ${responseSize} Bytes`;
