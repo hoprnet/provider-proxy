@@ -1,6 +1,8 @@
 export const providers = {
   matic_wildhorn:
     "https://still-patient-hill.matic.quiknode.pro/b4ecf45eb108716acdc775404e5b6bb9a46c18d8/",
+  matic_rio:
+    "https://nd-063-169-405.p2pify.com/199690512dd6f264fe75620a9197983d",
   xdai_mainnet:
     "https://still-patient-forest.xdai.quiknode.pro/f0cdbd6455c0b3aea8512fc9e7d161c1c0abf66a/",
   eth_gnosis_mainnet: "https://eth-erigon.lsotech.net/",
