@@ -31,3 +31,11 @@ Just upload the current state to Cloudflare. It will become live immediately.
 ```
 yarn wrangler publish
 ```
+
+## View Production Logs
+
+You may watch logs from the deployed and running workers:
+
+```
+yarn wrangler tail --format=pretty
+```
