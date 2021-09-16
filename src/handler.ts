@@ -30,32 +30,20 @@ export async function handleRequest(request: Request): Promise<Response> {
 
   return fetch(providerUrl, request).then(async function (response) {
     const elapsed = Date.now() - start;
+    const result = `returned http code ${response.status}`;
     let responseSizeInfo = "";
     const responseSize = Number(response.headers.get("content-length"));
     if (responseSize > 0) {
-      console.log(`response size: ${responseSize} Bytes`);
       responseSizeInfo = `, response size ${responseSize} Bytes`;
     }
-    const responseClone = response.clone();
-    const responseCloneJson = await responseClone.json();
-    let result = "ok";
     if (isMulticall) {
       const callCount = requestJson.length;
-      const errorResponse = responseCloneJson.find(
-        (r) => r.error !== undefined
-      );
-      if (errorResponse !== undefined) {
-        result = `at least 1 error ${errorResponse.error.message}`;
-      }
       console.log(
-        `Forwarded multi-call request to ${path}, processed in ${elapsed} ms, called method ${method}, returned ${result}, included ${callCount} calls${responseSizeInfo}`
+        `Forwarded multi-call request to ${path}, processed in ${elapsed} ms, called method ${method}, ${result}, included ${callCount} calls${responseSizeInfo}`
       );
     } else {
-      if (responseCloneJson.error !== undefined) {
-        result = `error ${responseCloneJson.error.message}`;
-      }
       console.log(
-        `Forwarded request to ${path}, processed in ${elapsed} ms, called method ${method}, returned ${result}${responseSizeInfo}`
+        `Forwarded request to ${path}, processed in ${elapsed} ms, called method ${method}, ${result}${responseSizeInfo}`
       );
     }
 
