@@ -47,6 +47,13 @@ export async function handleRequest(request: Request): Promise<Response> {
       );
     }
 
+    // set CORS headers
+    response = new Response(response.body, response)
+    response.headers.set('Access-Control-Allow-Origin', '*.hoprnet.org');
+    response.headers.set('Access-Control-Allow-Headers', 'Content-Type,Authorization,User-Agent');
+    response.headers.set('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+    response.headers.set('Access-Control-Allow-Credentials', 'true');
+
     return response;
   });
 }
