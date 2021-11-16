@@ -4,7 +4,7 @@ export const providers = {
   matic_rio:
     "https://nd-435-704-707.p2pify.com/9ad58676aefc2aea283ca0a66724bea6",
   xdai_mainnet:
-    "https://still-patient-forest.xdai.quiknode.pro/f0cdbd6455c0b3aea8512fc9e7d161c1c0abf66a/",
+    "https://:842d068fca3c53e26c85c5f4eb49e1fc@poa-xdai.gateway.pokt.network/v1/lb/61113fe218656e00369bdb9b",
   eth_gnosis_mainnet: "https://eth-erigon.lsotech.net/",
   eth_gnosis_rinkeby:
     "https://sparkling-spring-meadow.rinkeby.quiknode.pro/da2c0f72384c7fc99b857fca44dec8d06206a1dd/",
