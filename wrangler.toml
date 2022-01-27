@@ -1,8 +1,7 @@
 name = "provider-proxy"
 type = "javascript"
-zone_id = "PLACEHOLDER"
-account_id = "PLACEHOLDER"
-route = "/*"
+zone_id = ""
+route = ""
 workers_dev = true
 usage_model = "unbound"
 
