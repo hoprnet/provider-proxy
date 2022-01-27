@@ -3,7 +3,8 @@ export const providers = {
     "https://still-patient-hill.matic.quiknode.pro/b4ecf45eb108716acdc775404e5b6bb9a46c18d8/",
   matic_rio:
     "https://nd-435-704-707.p2pify.com/9ad58676aefc2aea283ca0a66724bea6",
-  xdai_mainnet:
+  xdai_mainnet: "https://xdai.poa.network",
+  xdai_mainnet_archive:
     "https://:39b78eea48bd48c2b687e9e7342bec1e@poa-xdai-archival.gateway.pokt.network/v1/lb/61dbeff75a6d11003821698f",
   xdai_mainnet_old:
     "https://:842d068fca3c53e26c85c5f4eb49e1fc@poa-xdai.gateway.pokt.network/v1/lb/61113fe218656e00369bdb9b",
