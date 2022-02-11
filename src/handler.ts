@@ -17,6 +17,18 @@ export async function handleRequest(request: Request): Promise<Response> {
     console.log(`Unknown request: ${request.url}`);
     return new Response("not found", { status: 404 });
   }
+  const [, providerUrls] = provider;
+  let providerUrl;
+  // check if we use a single provider or round-robin over an array
+  if (typeof providerUrls === "string") {
+    providerUrl = providerUrls;
+  } else if (Array.isArray(providerUrl)) {
+    providerUrl = providerUrls[Math.floor(Math.random() * providerUrls.length)];
+  } else {
+    // if the provider type is not known, return not found
+    console.log(`Unknown request: ${request.url}`);
+    return new Response("not found", { status: 404 });
+  }
 
   const requestJson = await request.clone().json();
   let isMulticall = false;
@@ -25,7 +37,6 @@ export async function handleRequest(request: Request): Promise<Response> {
     isMulticall = true;
     method = requestJson[0].method;
   }
-  const [, providerUrl] = provider;
   const start = Date.now();
 
   return fetch(providerUrl, request).then(async function (response) {
