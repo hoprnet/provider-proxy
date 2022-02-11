@@ -22,7 +22,7 @@ export async function handleRequest(request: Request): Promise<Response> {
   // check if we use a single provider or round-robin over an array
   if (typeof providerUrls === "string") {
     providerUrl = providerUrls;
-  } else if (Array.isArray(providerUrl)) {
+  } else if (Array.isArray(providerUrls)) {
     providerUrl = providerUrls[Math.floor(Math.random() * providerUrls.length)];
   } else {
     // if the provider type is not known, return not found
