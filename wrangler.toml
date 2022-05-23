@@ -1,7 +1,6 @@
 name = "provider-proxy"
 type = "javascript"
 zone_id = ""
-account_id = ""
 route = ""
 workers_dev = true
 usage_model = "unbound"
