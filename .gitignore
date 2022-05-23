@@ -1,4 +1,5 @@
 /node_modules/
+wrangler.toml
 
 # yarn v2/v3 specific
 .yarn/*

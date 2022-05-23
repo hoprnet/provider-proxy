@@ -17,7 +17,7 @@ export const providers = {
   eth_gnosis_mainnet_infura:
     "https://mainnet.infura.io/v3/7f8df481afe542f99fe5e01de8822202",
   eth_gnosis_mainnet_alt: "https://eth-erigon.lsotech.net/",
-  eth_goerli: "https://goerli.infura.io/v3/51d4d972f30c4d92b61f2b3898fccaf6",
+  eth_goerli: `https://apis.ankr.com/${GOERLI_STAGING_ANKR_API_PROJECT_ID}/${GOERLI_STAGING_ANKR_API_TOKEN}/eth/fast/goerli`,
   eth_ceramic_mainnet: "https://eth-erigon.lsotech.net/",
   eth_ceramic_testnet:
     "https://ropsten.infura.io/v3/bdd0361db7d24b2aa3fdae4d7b7c78fb",
