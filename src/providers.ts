@@ -18,8 +18,8 @@ export const providers = {
     "https://mainnet.infura.io/v3/7f8df481afe542f99fe5e01de8822202",
   eth_gnosis_mainnet_alt: "https://eth-erigon.lsotech.net/",
   eth_goerli: [
-    `https://eth-goerli.public.blastapi.io`,
-    // `https://rpc.ankr.com/eth_goerli`,
+    // `https://eth-goerli.public.blastapi.io`,
+    `https://rpc.ankr.com/eth_goerli`,
 //    `https://primary.goerli.rpc.hoprtech.net`,
 //    `https://secondary.goerli.rpc.hoprtech.net`,
   ],
