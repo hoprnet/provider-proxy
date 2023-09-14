@@ -4,7 +4,9 @@ export const providers = {
   matic_rio:
     "https://nd-435-704-707.p2pify.com/9ad58676aefc2aea283ca0a66724bea6",
   xdai_mainnet: [
-    `https://primary.gnosis-chain.rpc.hoprtech.net`
+    `https://primary.gnosis-chain.rpc.hoprtech.net`,
+    `https://secondary.gnosis-chain.rpc.hoprtech.net`,
+    `https://rpc.gnosischain.com/`
   ],
   xdai_mainnet_old:
     "https://:39b78eea48bd48c2b687e9e7342bec1e@poa-xdai-archival.gateway.pokt.network/v1/lb/61dbeff75a6d11003821698f",
