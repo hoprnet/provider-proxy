@@ -1,11 +1,10 @@
 name = "provider-proxy"
 main = "build/worker/shim.mjs"
-zone_id = ""
-route = ""
 workers_dev = true
 usage_model = "unbound"
 account_id = "1cb0ef192ff328d807b1128ed61c205f"
 compatibility_date = "2023-03-22"
+send_metrics = false
 
 [build]
 command = "yarn && make build"

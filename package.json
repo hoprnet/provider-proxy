@@ -2,11 +2,10 @@
   "name": "provider-proxy",
   "version": "0.2.0",
   "description": "Cloudflare worker to load balancer provider endpoints",
-  "scripts": {
-  },
   "author": "author",
   "license": "MIT OR Apache-2.0",
   "devDependencies": {
     "wrangler": "^3.8.0"
-  }
+  },
+  "packageManager": "yarn@3.6.3"
 }
