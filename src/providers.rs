@@ -29,7 +29,7 @@ pub fn get_provider(name: &str) -> Option<Provider> {
 }
 
 fn get_providers() -> Vec<Provider> {
-    return vec![
+    vec![
         provider(
             "xdai_mainnet",
             vec![
@@ -48,5 +48,5 @@ fn get_providers() -> Vec<Provider> {
                 endpoint("https://secondary.gnosis-chain.rpc.hoprtech.net", None),
             ],
         ),
-    ];
+    ]
 }

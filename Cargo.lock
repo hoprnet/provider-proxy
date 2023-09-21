@@ -454,6 +454,8 @@ version = "0.2.0"
 dependencies = [
  "console_error_panic_hook",
  "hyper",
+ "serde",
+ "serde_json",
  "time",
  "tokio",
  "worker",
