@@ -10,17 +10,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "18"
+      - name: Install Nix
+        uses: cachix/install-nix-action
+
+      - name: Install dependencies
+        run: nix-develop -c yarn
 
       - name: Build
-        run: yarn && yarn build
-
-      - name: Disable wrangler build
-        run: |
-          sed "s/^command\ =.*$/command\ =\ ''/g" wrangler.toml > wrangler.toml.new
-          mv wrangler.toml.new wrangler.toml
+        run: nix-develop -c make build
 
       - name: Publish
         uses: cloudflare/wrangler-action@v3
