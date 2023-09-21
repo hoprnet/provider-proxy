@@ -17,12 +17,13 @@ enum RequestBody {
     EthRequestBatch(Vec<EthRequest>),
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(PartialEq, Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
 struct EthRequest {
     method: String,
     jsonrpc: String,
-    params: Vec<String>,
-    id: i32,
+    params: serde_json::Value,
+    id: serde_json::Value,
 }
 
 impl RequestBody {
