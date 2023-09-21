@@ -1,14 +1,32 @@
 {
   description = "provider proxy";
 
-  inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.nixpkgs.url = github:NixOS/nixpkgs/nixpkgs-unstable;
+  inputs.rust-overlay.url = github:oxalica/rust-overlay;
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.simpleFlake {
-      inherit self nixpkgs;
-      name = "provider proxy";
-      shell = ./shell.nix;
+  inputs.rust-overlay.inputs = {
+    nixpkgs.follows = "nixpkgs";
+  };
+
+  outputs = { self, nixpkgs, flake-parts, rust-overlay, ... }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      perSystem = { config, self', inputs', system, ... }:
+        let
+          overlays = [ (import rust-overlay) ];
+          pkgs = import nixpkgs {
+            inherit system overlays;
+          };
+        in
+        {
+          devShells.default = import ./shell.nix {
+            inherit pkgs;
+          };
+        };
       systems = [ "x86_64-linux" "aarch64-darwin" ];
+      flake = {
+        overlays = [
+          rust-overlay.overlays
+        ];
+      };
     };
 }

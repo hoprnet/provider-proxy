@@ -9,3 +9,6 @@
 !.yarn/versions
 .pnp.*
 /dist/
+
+/.direnv/
+/target/

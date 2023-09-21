@@ -49,16 +49,22 @@ function curl_call() {
   declare path="${1}"
   declare method="${2:-POST}"
 
-  curl -X ${method} -s -o /dev/null -w '%{http_code}' \
-    -H "Content-Type: application/json" \
-    --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":1}' \
-    http://127.0.0.1:${dev_port}/${path}
+  if [ "${method}" = "GET" ] || [ "${method}" = "HEAD" ]; then
+    curl -X ${method} -s -o /dev/null -w '%{http_code}' \
+      -H "Content-Type: application/json" \
+      http://127.0.0.1:${dev_port}/${path}
+  else
+    curl -X ${method} -s -o /dev/null -w '%{http_code}' \
+      -H "Content-Type: application/json" \
+      --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":1}' \
+      http://127.0.0.1:${dev_port}/${path}
+  fi
 }
 
 log "check if wrangler-dev is running on port ${dev_port}"
 if ! nc -z -w 1 127.0.0.1 ${dev_port}; then
   log "start wrangler-dev on port ${dev_port}"
-  yarn wrangler dev -p ${dev_port} &
+  npx wrangler dev --port ${dev_port} &
   sleep 10
 fi
 
@@ -81,7 +87,7 @@ else
   log "test unconfigured path - /anypath - OK"
 fi
 
-declare providers=$(grep -E "(eth_|xdai_|matic_)" src/providers.ts | awk -F: "{ print \$1; }" | tr -d ' ')
+declare providers=( gnosis xdai_mainnet )
 for provider in ${providers}; do
   log "test supported provider - ${provider}"
   if [ ! "$(curl_call "${provider}")" -eq "200" ]; then

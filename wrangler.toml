@@ -1,11 +1,9 @@
 name = "provider-proxy"
-type = "javascript"
-zone_id = ""
-route = ""
+main = "build/worker/shim.mjs"
 workers_dev = true
 usage_model = "unbound"
+compatibility_date = "2023-03-22"
+send_metrics = false
 
 [build]
-command = "yarn && yarn build"
-[build.upload]
-format = "service-worker"
+command = "yarn && make build"
