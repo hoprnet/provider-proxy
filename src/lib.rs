@@ -11,6 +11,7 @@ pub use console_error_panic_hook::set_once as set_panic_hook;
 use worker::*;
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(untagged)]
 enum RequestBody {
     EthRequest(EthRequest),
     EthRequestBatch(Vec<EthRequest>),
