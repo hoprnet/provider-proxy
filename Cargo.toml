@@ -7,6 +7,7 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
+chrono = "0.4.31"
 console_error_panic_hook = { version = "0.1" }
 hyper = { version="0.14", default-features=false, features=['http1', 'client'] }
 serde = { version="1.0.188", features=['derive'] }
