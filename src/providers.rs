@@ -33,8 +33,9 @@ fn get_providers() -> Vec<Provider> {
         provider(
             "xdai_mainnet",
             vec![
-                endpoint("https://primary.gnosis-chain.rpc.hoprtech.net", None),
-                endpoint("https://secondary.gnosis-chain.rpc.hoprtech.net", None),
+                endpoint("https://gnosis-provider.rpch.tech", None),
+                /// endpoint("https://primary.gnosis-chain.rpc.hoprtech.net", None),
+                /// endpoint("https://secondary.gnosis-chain.rpc.hoprtech.net", None),
             ],
         ),
         provider(
