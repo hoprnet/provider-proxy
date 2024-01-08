@@ -13,14 +13,13 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@v22
 
-      - name: Install dependencies
-        run: nix-develop -c yarn
-
       - name: Build
-        run: nix-develop -c make build
+        run: |
+          nix develop -c yarn
+          nix develop -c yarn build
 
       - name: Publish
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@3
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
         env:

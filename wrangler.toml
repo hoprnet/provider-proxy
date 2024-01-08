@@ -1,9 +1,8 @@
 name = "provider-proxy"
-main = "build/worker/shim.mjs"
 workers_dev = true
 usage_model = "unbound"
-compatibility_date = "2023-03-22"
-send_metrics = false
+main = "src/index.ts"
+compatibility_date = "2023-12-18"
 
 [build]
-command = "yarn && make build"
+command = "yarn && yarn build"
