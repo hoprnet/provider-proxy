@@ -1,11 +1,8 @@
 name = "provider-proxy"
-type = "javascript"
-zone_id = ""
-route = ""
 workers_dev = true
 usage_model = "unbound"
+main = "src/index.ts"
+compatibility_date = "2023-12-18"
 
 [build]
 command = "yarn && yarn build"
-[build.upload]
-format = "service-worker"

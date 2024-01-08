@@ -38,7 +38,7 @@ function cleanup {
   set +Eeuo pipefail
 
   log "shut down wrangler-dev if still running"
-  lsof -i ":${dev_port}" -s TCP:LISTEN -t | xargs -I {} -n 1 kill {}
+  lsof -i ":${dev_port}" -s TCP:LISTEN -t | xargs kill -9
 
   exit $EXIT_CODE
 }
@@ -58,7 +58,7 @@ function curl_call() {
 log "check if wrangler-dev is running on port ${dev_port}"
 if ! nc -z -w 1 127.0.0.1 ${dev_port}; then
   log "start wrangler-dev on port ${dev_port}"
-  yarn wrangler dev -p ${dev_port} &
+  yarn wrangler dev --port ${dev_port} &
   sleep 10
 fi
 

@@ -10,12 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "16"
+      - name: Install Nix
+        uses: cachix/install-nix-action@v22
 
       - name: Build
-        run: yarn && yarn build
+        run: |
+          nix develop -c yarn
+          nix develop -c yarn build
 
       - name: Disable wrangler build
         run: |
@@ -23,7 +24,7 @@ jobs:
           mv wrangler.toml.new wrangler.toml
 
       - name: Publish
-        uses: cloudflare/wrangler-action@1.3.0
+        uses: cloudflare/wrangler-action@3
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
         env:

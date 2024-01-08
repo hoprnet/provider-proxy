@@ -9,3 +9,5 @@
 !.yarn/versions
 .pnp.*
 /dist/
+/.direnv/
+/.wrangler/
