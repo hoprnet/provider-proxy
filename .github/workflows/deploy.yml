@@ -18,11 +18,6 @@ jobs:
           nix develop -c yarn
           nix develop -c yarn build
 
-      - name: Disable wrangler build
-        run: |
-          sed "s/^command\ =.*$/command\ =\ ''/g" wrangler.toml > wrangler.toml.new
-          mv wrangler.toml.new wrangler.toml
-
       - name: Publish
         uses: cloudflare/wrangler-action@3
         with:
