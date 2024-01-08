@@ -15,16 +15,8 @@ with pkgs;
 mkShell {
   buildInputs = [
     envsubst
-    nodejs-18_x
-    (yarn.override { nodejs = nodejs-18_x; })
-
-    ## rust for development and required utils
-    (rust-bin.fromRustupToolchainFile ./rust-toolchain.toml)
-    wasm-pack # v0.11.1
-    binaryen # v113 (includes wasm-opt)
-    wasm-bindgen-cli # v0.2.83
-    pkg-config
-
+    nodejs-16_x
+    (yarn.override { nodejs = nodejs-16_x; })
     macosPkgs
     linuxPkgs
   ];
