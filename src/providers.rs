@@ -48,12 +48,5 @@ fn get_providers() -> Vec<Provider> {
                 endpoint("https://secondary.gnosis-chain.rpc.hoprtech.net", None),
             ],
         ),
-        provider(
-            "gnosis-ext",
-            vec![endpoint(
-                "https://rpc.eu-central-2.gateway.fm/v4/gnosis/non-archival/mainnet",
-                Some("WlpVWYtSXZkKShofH6G6zjk7ydfWEsuz.fZupbyX3PHu6OD0g"),
-            )],
-        ),
     ]
 }
