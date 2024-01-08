@@ -4,6 +4,7 @@ use crate::providers::get_provider;
 use chrono::prelude::*;
 use serde::{Deserialize, Serialize};
 use std::str::FromStr;
+use std::str::Utf8Error;
 
 pub use console_error_panic_hook::set_once as set_panic_hook;
 
@@ -34,6 +35,10 @@ impl RequestBody {
     }
 }
 
+fn map_utf8_error(error: Utf8Error) -> worker::Error {
+    worker::Error::RustError(format!("Utf8Error: {:?}", error))
+}
+
 fn map_hyper_error(error: hyper::Error) -> worker::Error {
     worker::Error::RustError(format!("hyper::Error: {:?}", error))
 }
@@ -49,27 +54,21 @@ async fn make_request(
     method: String,
 ) -> Result<Response> {
     let start = Utc::now();
-    let mut hyper_response = sender.send_request(request).await.map_err(map_hyper_error)?;
+    let hyper_response = sender.send_request(request).await.map_err(map_hyper_error)?;
     let end = Utc::now();
     let elapsed = end.timestamp_millis() - start.timestamp_millis();
-    let buf = hyper::body::to_bytes(hyper_response.body_mut())
-        .await
-        .map_err(map_hyper_error)?;
-
-    let mut response = Response::from_bytes(buf.to_vec())?.with_status(hyper_response.status().as_u16());
-    hyper_response
-        .headers()
-        .iter()
-        .for_each(|(k, v)| _ = response.headers_mut().set(k.as_str(), v.to_str().unwrap()));
-
+    let buf = hyper::body::to_bytes(hyper_response).await.map_err(map_hyper_error)?;
+    let text = std::str::from_utf8(&buf).map_err(map_utf8_error)?;
+    let mut response = Response::ok(text)?;
+    response.headers_mut().append("Content-Type", "application/json")?;
+    let ret_code = response.status_code();
     console_log!(
         "Forwarded request to {}, processed in {} ms, called method {}, returned http code {}",
         provider_name,
         elapsed,
         method,
-        response.status_code()
+        ret_code
     );
-
     Ok(response)
 }
 
@@ -120,13 +119,7 @@ pub async fn main(req: Request, _env: Env, _ctx: worker::Context) -> Result<Resp
     let mut request = hyper::Request::builder()
         .uri(endpoint.url.clone())
         .method("POST")
-        .header("Host", url.domain().unwrap())
-        .header("Content-Type", "application/json")
-        .header("connection", "Keep-Alive");
-
-    if let Ok(Some(enc)) = req.headers().get("accept-encoding") {
-        request = request.header("Accept-Encoding", enc);
-    }
+        .header("Host", url.domain().unwrap());
 
     if let Some(auth_token) = endpoint.auth_token.clone() {
         request = request.header("Authorization", format!("Bearer {}", auth_token));
