@@ -1,7 +1,8 @@
 export const providers = {
   xdai_mainnet: [
-    `https://gnosis-provider.rpch.tech`
-    // `https://primary.gnosis-chain.rpc.hoprtech.net`,
+    // FIXME: activate once upstream error handling works
+    // `https://gnosis-provider.rpch.tech`
+    `https://primary.gnosis-chain.rpc.hoprtech.net`
     // `https://secondary.gnosis-chain.rpc.hoprtech.net`
   ],
   eth_gnosis_mainnet_infura:
