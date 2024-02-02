@@ -81,7 +81,7 @@ else
   log "test unconfigured path - /anypath - OK"
 fi
 
-declare providers=$(grep -E "(eth_|xdai_|matic_)" src/providers.ts | awk -F: "{ print \$1; }" | tr -d ' ')
+declare providers=$(grep -E "(eth_|xdai_|gnosis_)" src/providers.ts | awk -F: "{ print \$1; }" | tr -d ' ')
 for provider in ${providers}; do
   log "test supported provider - ${provider}"
   if [ ! "$(curl_call "${provider}")" -eq "200" ]; then
