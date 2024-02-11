@@ -1,6 +1,6 @@
 export const providers = {
   gnosis_mainnet_archive: [
-    "https://rpc.eu-central-2.gateway.fm/v4/gnosis/archival/mainnet?apiKey=tAb_6JUvPKeNV06gJ1YdctcMwTvQp4_F.2G6vFAJtwtvushb3"
+    "https://gnosis-chain.rpc.rank1.co"
   ],
   xdai_mainnet: [
     // FIXME: activate once upstream error handling works
